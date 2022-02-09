@@ -1,6 +1,8 @@
 package com.nmbapp.nmb;
 
-public class Account{
+import org.bson.Document;
+
+public class Account extends Document{
 
 	public String accountNumber, dateOfCreation, currency, mobileNumber, branch;
 	public double initialBalance, activeBalance, debitAmmount, creditAmmount;

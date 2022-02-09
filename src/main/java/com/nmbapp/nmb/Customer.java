@@ -1,6 +1,8 @@
 package com.nmbapp.nmb;
+import org.bson.Document;
 
-public class Customer{
+
+public class Customer extends Document{
 
 	public String firstName, lastName, nationalID, title, username, gender, creationDate, phoneNumber, branch;
 	public boolean homeOwner;
