@@ -59,7 +59,7 @@ public class Controller{
 			MongoClient mongoClient = MongoClients.create("mongodb://127.0.0.1:27017");
                         MongoDatabase database = mongoClient.getDatabase("nmb");
                         MongoCollection<Document> collection = database.getCollection("customers");
-			return collection.find(new Document("nationalID", id));
+			return collection.find(new Document("nationalID", id)).first();
 
                 }catch(Exception e){
                         e.printStackTrace();
@@ -71,20 +71,24 @@ public class Controller{
 	@PostMapping(path = "/update", consumes = "application/json")
 	public Object updateAccountInfo(){
                 try{
-
+			MongoClient mongoClient = MongoClients.create("mongodb://127.0.0.1:27017");
+                        MongoDatabase database = mongoClient.getDatabase("nmb");
+                        MongoCollection<Document> collection = database.getCollection("customers");
                         return "{operation:0xff000002, code:0}";
                 }catch(Exception e){
                         e.printStackTrace();
                         return "Internal Server Error";
-                }
 
+		}
 	}
 
-
 	@GetMapping("/delete")
-	public Object deleteAccount(){
+	public Object deleteAccount(@RequestParam String id){
                 try{
-
+			MongoClient mongoClient = MongoClients.create("mongodb://127.0.0.1:27017");
+                        MongoDatabase database = mongoClient.getDatabase("nmb");
+                        MongoCollection<Document> collection = database.getCollection("customers");
+                        collection.deleteOne(new Document("nationalID", id));
                         return "{operation:0xff000003, code:0}";
                 }catch(Exception e){
                         e.printStackTrace();
