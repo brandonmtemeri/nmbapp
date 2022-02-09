@@ -2,9 +2,9 @@ package com.nmbapp.nmb;
 
 public class Customer{
 
-	public String firstName, lastName, nationalID, title, username, gender, creationDate;
+	public String firstName, lastName, nationalID, title, username, gender, creationDate, phoneNumber, branch;
 	public boolean homeOwner;
-	private Account account;
+	public Account account;
 
 	public Customer() {}
 	public Customer(String firstName, String lastName,

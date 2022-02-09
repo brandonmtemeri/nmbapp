@@ -7,6 +7,8 @@
                 "username":"username",
                 "gender":"gender",
                 "creationDate":"creationDate",
-		"homeOwner":true
+		"homeOwner":true,
+		"phoneNumber": "0714557890",
+		"branch":"Harare"
 
 }

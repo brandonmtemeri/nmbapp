@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 
 import com.nmbapp.nmb.Customer;
 import com.nmbapp.nmb.Account;
+import java.util.Date;
 
 @RestController
 public class Controller{
@@ -16,6 +17,19 @@ public class Controller{
 	public Object createAccount(@RequestBody Customer customer){
 		try{
 			Account account = new Account();
+			String acc = account.generateAccountNumber();
+
+			account.accountNumber = acc;
+			account.dateOfCreation = new Date().toString();
+			account.currency = "US$";
+			account.mobileNumber = customer.phoneNumber;
+			account.branch = customer.branch;
+			account.initialBalance = 200.00;
+			account.activeBalance = 100.00;
+			account.debitAmmount = 0;
+			account.creditAmmount = 0;
+			customer.account = account;
+
 			return customer;
 		}catch(Exception e){
 			e.printStackTrace();
