@@ -1,0 +1,12 @@
+{
+
+		"firstName":"firstName",
+                "lastName":"lastName",
+                "nationalID":"nationalID",
+                "title":"title",
+                "username":"username",
+                "gender":"gender",
+                "creationDate":"creationDate",
+		"homeOwner":true
+
+}
