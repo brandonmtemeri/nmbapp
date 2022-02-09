@@ -3,7 +3,9 @@ package com.nmbapp.nmb;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.http.ResponseEntity;
 
 import com.mongodb.MongoException;
@@ -14,8 +16,7 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
-import com.nmbapp.nmb.Customer;
-import com.nmbapp.nmb.Account;
+import com.nmbapp.nmb.*;
 import java.util.Date;
 
 @RestController
@@ -44,47 +45,50 @@ public class Controller{
 
 			collection.insertOne(customer);
 			database.getCollection("accounts").insertOne(account);
-
 			return customer;
+
 		}catch(Exception e){
 			e.printStackTrace();
-			return "{operation:0xff000000, code:-1}";
+			return "Internal Server Error";
 		}
 	}
 
 	@GetMapping("/info")
-	public String getAccountInfo(){
+	public Object getAccountInfo(@RequestParam String id){
 		try{
+			MongoClient mongoClient = MongoClients.create("mongodb://127.0.0.1:27017");
+                        MongoDatabase database = mongoClient.getDatabase("nmb");
+                        MongoCollection<Document> collection = database.getCollection("customers");
+			return collection.find(new Document("nationalID", id));
 
-                        return "{operation:0xff000001, code:0}";
                 }catch(Exception e){
                         e.printStackTrace();
-                        return "{operation:0xff000001, code:-1}";
+                        return "Internal Server Error";
                 }
 
 	}
 
 	@PostMapping(path = "/update", consumes = "application/json")
-	public String updateAccountInfo(){
+	public Object updateAccountInfo(){
                 try{
 
                         return "{operation:0xff000002, code:0}";
                 }catch(Exception e){
                         e.printStackTrace();
-                        return "{operation:0xff000002, code:-1}";
+                        return "Internal Server Error";
                 }
 
 	}
 
 
 	@GetMapping("/delete")
-	public String deleteAccount(){
+	public Object deleteAccount(){
                 try{
 
                         return "{operation:0xff000003, code:0}";
                 }catch(Exception e){
                         e.printStackTrace();
-                        return "{operation:0xff000003, code:-1}";
+                        return "Internal Server Error";
                 }
 
 	}
